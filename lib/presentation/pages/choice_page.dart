@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../common/app_images.dart';
-import '../widgets/choice_card.dart';
+import '../../domain/flora_services.dart';
+import '../widgets/service_card.dart';
 import 'app_base_page.dart';
 
 class ChoicePage extends StatelessWidget {
@@ -16,29 +17,23 @@ class ChoicePage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              ChoiceCard(
-                // we can use easy_translation for translations our texts
-                // or any other similar package
-                title: 'Track my period',
-                subTitle: 'contraception and wellbeing',
-                onPressed: () => Navigator.pushNamed(
-                  context,
-                  '/birthdaySelector',
-                ),
+              ServiceCard(
+                service: FloraService.trackPeriod,
+                onPressed: (service) => _onCardPressed(context, service),
               ),
               const SizedBox(height: 73),
-              ChoiceCard(
-                title: 'Get pregnant',
-                subTitle: 'learn about reproductive health',
-                onPressed: () => Navigator.pushNamed(
-                  context,
-                  '/birthdaySelector',
-                ),
+              ServiceCard(
+                service: FloraService.getPregnant,
+                onPressed: (service) => _onCardPressed(context, service),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _onCardPressed(BuildContext context, FloraService service) {
+    // Navigator.pushNamed(context, '/birthdaySelector');
   }
 }
