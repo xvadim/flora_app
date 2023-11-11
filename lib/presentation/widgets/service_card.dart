@@ -15,19 +15,6 @@ class ServiceCard extends StatelessWidget {
   final FloraService service;
   final ValueChanged<FloraService>? onPressed;
 
-  // we can use easy_translation for translations our texts
-  // or any other similar package
-  static final _serviceDescription = {
-    FloraService.trackPeriod: (
-      title: 'Track my period',
-      descr: 'contraception and wellbeing',
-    ),
-    FloraService.getPregnant: (
-      title: 'Get pregnant',
-      descr: 'learn about reproductive health',
-    ),
-  };
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -46,16 +33,14 @@ class ServiceCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  // title,
-                  _serviceDescription[service]!.title,
+                  serviceDescription[service]!.title,
                   style: context.theme.textTheme.titleLarge?.copyWith(
                     fontSize: 30,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
                 Text(
-                  // subTitle,
-                  _serviceDescription[service]!.descr,
+                  serviceDescription[service]!.descr,
                   style: context.theme.textTheme.bodyMedium?.copyWith(
                     fontSize: 20,
                     fontWeight: FontWeight.w400,

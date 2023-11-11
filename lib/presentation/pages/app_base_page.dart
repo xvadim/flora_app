@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../common/app_images.dart';
-
 class AppBasePage extends StatelessWidget {
   const AppBasePage({
     super.key,

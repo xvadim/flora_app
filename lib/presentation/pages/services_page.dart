@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../application/flora_navigator_bloc.dart';
 import '../../common/app_images.dart';
 import '../../domain/flora_services.dart';
 import '../widgets/service_card.dart';
 import 'app_base_page.dart';
 
-class ChoicePage extends StatelessWidget {
-  const ChoicePage({super.key});
+class ServicesPage extends StatelessWidget {
+  const ServicesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,7 @@ class ChoicePage extends StatelessWidget {
   }
 
   void _onCardPressed(BuildContext context, FloraService service) {
-    // Navigator.pushNamed(context, '/birthdaySelector');
+    final block = context.read<FloraNavigatorBloc>();
+    block.add(FloraNavigatorEvent.serviceSelected(service));
   }
 }

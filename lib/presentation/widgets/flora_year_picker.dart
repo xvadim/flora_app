@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-// We could use ListWheelScrollView covered by Container with gradient opacity,
+// We could use a ListWheelScrollView covered by a Container with gradient opacity,
 // but it has some limitations, f.e. doesn't support snapping
 class FloraYearPicker extends StatelessWidget {
   const FloraYearPicker({
@@ -98,6 +98,7 @@ class _YearListViewState extends State<YearListView> {
 
     _halfItemExtent = widget.itemExtent / 2;
     _controller = widget.controller ?? ScrollController();
+
     //an improvement: select a specified year
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.jumpTo(_controller.position.maxScrollExtent);
@@ -203,7 +204,7 @@ class _YearListViewState extends State<YearListView> {
     double intendedPixel = index * widget.itemExtent;
     double difference = intendedPixel - _currentPixel;
 
-    return 1 - min(difference.abs() / 500, 0.5);
+    return 1 - min(difference.abs() / 600, 0.5);
   }
 
   // Calculates item's opacity

@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../application/flora_navigator_bloc.dart';
 import '../../common/app_images.dart';
 import '../../common/buildcontext_extension.dart';
 import '../widgets/flora_year_picker.dart';
@@ -17,7 +18,6 @@ class BirthdaySelectorPage extends StatefulWidget {
 
 class _BirthdaySelectorPageState extends State<BirthdaySelectorPage> {
   late int _currentYear;
-  late int _minimumYear;
   late int _selectedYear;
 
   @override
@@ -25,13 +25,7 @@ class _BirthdaySelectorPageState extends State<BirthdaySelectorPage> {
     super.initState();
 
     _currentYear = DateTime.now().year;
-    _minimumYear = _currentYear - 10;
     _selectedYear = _currentYear;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
@@ -56,7 +50,7 @@ class _BirthdaySelectorPageState extends State<BirthdaySelectorPage> {
               child: FloraYearPicker(
                 itemExtent: 60,
                 visibleItemsCount: 5,
-                minimumYear: _minimumYear,
+                minimumYear: _currentYear - 100,
                 maximumYear: _currentYear,
                 itemStyle: GoogleFonts.nunito(
                   textStyle: Theme.of(context).textTheme.displayLarge,
@@ -64,9 +58,7 @@ class _BirthdaySelectorPageState extends State<BirthdaySelectorPage> {
                   fontSize: 40,
                   fontWeight: FontWeight.w900,
                 ),
-                onSelectedYearChanged: (year) {
-                  _selectedYear = year;
-                },
+                onSelectedYearChanged: (year) => _selectedYear = year,
               ),
             ),
             const Spacer(),
@@ -79,7 +71,7 @@ class _BirthdaySelectorPageState extends State<BirthdaySelectorPage> {
   }
 
   Future<void> _onNext() async {
-    print('CUR IT $_selectedYear');
-    // await Navigator.pushNamed(context, '/summary');
+    final block = context.read<FloraNavigatorBloc>();
+    block.add(FloraNavigatorEvent.yearEntered(_selectedYear));
   }
 }
